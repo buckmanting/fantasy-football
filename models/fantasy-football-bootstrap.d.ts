@@ -1,5 +1,5 @@
 import {Event} from "./event";
-import {GameSettings} from "./game.settings";
+import {GameSettings} from "./game-settings";
 import {Phase} from "./phase";
 import {Team} from "./team";
 import {Element} from "./element";

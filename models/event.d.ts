@@ -1,5 +1,5 @@
-import {ChipPlayD} from "./chip.play";
-import {TopElementInfo} from "./top-element.info";
+import {ChipPlay} from "./chip-play";
+import {TopElementInfo} from "./top-element-info";
 
 export interface Event {
     id: number;
@@ -15,7 +15,7 @@ export interface Event {
     is_previous: boolean;
     is_current: boolean;
     is_next: boolean;
-    chip_plays: ChipPlayD[];
+    chip_plays: ChipPlay[];
     most_selected?: number;
     most_transferred_in?: number;
     top_element?: number;
