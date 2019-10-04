@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run build:live",
     "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+    "build:live": "nodemon --watch '**/*.ts' --exec 'ts-node' app.ts"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "@types/node": "^12.7.11",
+    "nodemon": "^1.19.3",
+    "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
   }
 }

@@ -1,11 +1,11 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const reload = require('reload');
-const http = require('http');
-const watch = require('node-watch');
+import createError from 'http-errors';
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import reload from 'reload';
+import http from 'http';
+import watch from 'node-watch';
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -16,7 +16,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -27,12 +27,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req: any, res: any, next: any) => {
     next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err: any, req: any, res: any, next: any) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -58,18 +58,18 @@ const server = http.createServer(app);
 app.locals.liveReload = true;
 
 const reloadServer = reload(app);
-watch(path.join(__dirname, '/views'), {recursive: true}, (event, name) => {
+watch(path.join(__dirname, '/views'), {recursive: true}, (event: any, name: any) => {
     console.log('View changed: reloading client');
     reloadServer.reload();
 });
 
-app.get('/__reload_client__', (req, res) => {
+app.get('/__reload_client__', (req: any, res: any) => {
     console.log('Reload client triggered');
     reloadServer.reload();
     res.status(200).end();
 });
 
-app.listen(app.get('port'), error => {
+app.listen(app.get('port'), (error: any) => {
     if (error) {
         console.error(error);
     } else {
