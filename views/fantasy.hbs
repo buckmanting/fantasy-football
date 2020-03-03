@@ -1,0 +1,33 @@
+<h2>The data</h2>
+<small class="text-muted">Total players: {{players.length}}</small>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Team</th>
+        <th scope="col">Name</th>
+        <th scope="col">Form</th>
+        <th scope="col">Points per game</th>
+        <th scope="col">transferRatio</th>
+        <th scope="col">valueForm</th>
+        <th scope="col">expPoints</th>
+        <th scope="col">thisPoints</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each players}}
+        <tr>
+            <td><img src="{{teamLogo}}" alt="team logo" height="20px"/></td>
+            <td>{{playerName}}</td>
+            <td>{{form}}</td>
+            <td>{{pointsPerGame}}</td>
+            <td>{{transferRatio}}</td>
+            <td>{{valueForm}}</td>
+            <td>{{expPoints}}</td>
+            <td>{{thisPoints}}</td>
+
+
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

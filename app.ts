@@ -5,10 +5,10 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import reload from 'reload';
 import http from 'http';
-import watch from 'node-watch';
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const fantasyRouter = require('./routes/fantasy');
 
 const app = express();
 
@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/fantasy', fantasyRouter);
 
 // catch 404 and forward to error handler
 app.use((req: any, res: any, next: any) => {
@@ -44,37 +45,22 @@ app.use((err: any, req: any, res: any, next: any) => {
 
 const server = http.createServer(app);
 
-// const reloadServer = reload(app).then(function (reloadReturned) {
-//     // reloadReturned is documented in the returns API in the README
-//
-//     // Reload started, start web server
-//     server.listen(app.get('port'), function () {
-//         console.log('Web server listening on port ' + app.get('port'));
-//     })
-// }).catch(function (err) {
-//     console.error('Reload could not start, could not start server/fantasy-football app', err);
-// });
+// Reload code here
+reload(app).then(function (reloadReturned) {
+    // reloadReturned is documented in the returns API in the README
 
-app.locals.liveReload = true;
-
-const reloadServer = reload(app);
-watch(path.join(__dirname, '/views'), {recursive: true}, (event: any, name: any) => {
-    console.log('View changed: reloading client');
-    reloadServer.reload();
+    // Reload started, start web server
+    server.listen(app.get('port'), function () {
+        console.info(`Listening on http://localhost:${app.get('port')}/`);
+    })
+}).catch(function (err) {
+    console.error('Reload could not start, could not start server/sample app', err)
 });
 
 app.get('/__reload_client__', (req: any, res: any) => {
     console.log('Reload client triggered');
-    reloadServer.reload();
+    // reloadServer.reload();
     res.status(200).end();
-});
-
-app.listen(app.get('port'), (error: any) => {
-    if (error) {
-        console.error(error);
-    } else {
-        console.info(`Listening on http://localhost:${app.get('port')}/`);
-    }
 });
 
 module.exports = app;
